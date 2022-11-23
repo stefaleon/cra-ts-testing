@@ -31,16 +31,26 @@ const App: React.FC = () => {
     }
   };
 
-  fetchUsers();
+  const getUsers = () => {
+    fetchUsers();
+  };
+
+  const clearUsers = () => {
+   setUsers(null);
+   setHaveData(false);
+  };
+
 
   return (
     <div className="App">
       App
       <div>Some test env value: {process.env.REACT_APP_TEST_VALUE}</div>
       <div>Have data: {haveData.toString()}</div>
+      {isNull(users) &&  <button onClick={getUsers}>Get users</button>}
       {!isNull(users) && (
         <div>
-          Users:{" "}
+          <button onClick={clearUsers}>Clear users</button>
+          <div>Users:</div>
           {users.map((item) => (
             <div key={item.id}>
               {item.id} {item.name}
